@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container my-5">
+        <h1>{{movie.title}}</h1>
+        <div class="row">
+            <div class="col">
+                <img src="{% if movie.poster_path %}https://image.tmdb.org/t/p/original/{{movie.poster_path}}{% else %} https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg{% endif %}" class="card-img-top" alt="{{movie.title}}">
+            </div>
+            <div class="col">
+                <p>{{movie.overview}}</p>
+                <ul class="list-inline">
+                    <h2>Genres</h2>
+                    {% for genre in movie.genres %}
+                        <li class="list-inline-item">
+                            <strong>{{genre.name}}</strong>
+                        </li>
+                    {% empty %}
+                        <p class="text-muted">No hay géneros.</p>
+                    {% endfor %}
+                </ul>
+                <h2>Director:</h2>
+                {% for member in credits.crew %}
+                    {% if member.job == "Director" %}
+                        <li class="list-inline-item">{{member.name}}</li>
+                    {% endif %}
+                    {% empty %}
+                    <p>No hay director registrado.</p>
+                {% endfor %}
+                <ul class="list-inline">
+                    <h2>Cast:</h2>
+                    {% for member in credits.cast|slice:"10" %}
+                        <li class="list-inline-item">
+                            {{member.name}}
+                        </li>
+                        {% empty %}
+                        <p class="text-muted">No hay cast disponible.</p>
+                    {% endfor %}
+                </ul>
+
+                
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

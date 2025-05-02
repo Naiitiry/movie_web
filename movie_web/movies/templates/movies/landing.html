@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <form method="GET" >
+        <select class="btn btn-primary dropdown-toggle" name="category" hx-get="{% url 'landing_page' %}" hx-target="#movie-container" hx-swap="innerHTML">
+            <option value="popular" {% if category == 'popular' %} selected {% endif %}>Populares</option>
+            <option value="now_playing" {% if category == 'now_playing' %} selected {% endif %}>Reproduciendo</option>
+            <option value="top_rated" {% if category == 'top_rated' %} selected {% endif %}>Top puntuadas</option>
+            <option value="upcoming" {% if category == 'upcoming' %} selected {% endif %}>Próximas</option>
+        </select>
+    </form>
+    <form method="GET" hx-get="{% url 'landing_page' %}" hx-target="#movie-container" hx-swap="innerHTML" class="input-group w-50 mt-4">
+        <input type="text" name="search" placeholder="Busqueda de películas" class="form-control">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary ">Search</button>
+        </div>
+    </form>
+    <div id="movie-container" class="row mt-4">
+        {% include "movies/partials/_movie_list.html" %}
+    </div>
+</div>
+{% endblock %}
