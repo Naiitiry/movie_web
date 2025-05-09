@@ -3,6 +3,9 @@
       <a class="navbar-brand" href="/">Películas</a>
       <div>
         {% if user.is_authenticated %}
+          <li class="d-inline">
+            <a class="nav-link text-light" href="{% url 'profile' %}">{{user.username|capfirst}}'s Hub</a>
+          </li>
           <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="nav-item text-light" style="border:none; background:none">

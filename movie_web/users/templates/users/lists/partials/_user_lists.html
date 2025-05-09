@@ -1,0 +1,18 @@
+<ul class="list-group">
+    {% for list in user_lists %}
+        <li class="list-group-item">
+            <a href="#">{{list.name}}</a>
+            <button class="btn btn-danger">Borrar</button>
+        </li>
+    {% endfor %}
+</ul>
+<button 
+    hx-get = "{% url 'create_list' %}"
+    hx-swap = "innerHTML"
+    hx-target = "#create-form-container"
+    class="btn btn-success mt-2"
+        >List
+    </button>
+    <div id="create-form-container">
+        
+    </div>
